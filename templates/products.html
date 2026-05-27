@@ -9,18 +9,297 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Products CSS -->
-    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <style>
+        :root {
+            --orange: #ff6b00;
+            --dark: #0b0c10;
+            --card: rgba(20, 20, 25, 0.85);
+            --text: #ffffff;
+            --muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #0b0c10;
+            color: white;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Background */
+        .bg-container {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+        }
+
+        .welding-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(255, 107, 0, 0.08));
+        }
+
+        /* Header */
+        .topbar {
+            padding: 30px 50px;
+        }
+
+        .back-btn {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .back-btn:hover {
+            color: var(--orange);
+        }
+
+        /* Main Section */
+        .products-section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px 80px;
+            text-align: center;
+        }
+
+        .products-section h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            max-width: 700px;
+            margin: auto auto 60px;
+            line-height: 1.7;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Product Cards */
+        .card {
+            width: 340px;
+            background: var(--card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 30px;
+            text-align: left;
+            transition: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 107, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(255, 107, 0, 0.15);
+        }
+
+        .badge {
+            font-size: 12px;
+            color: #cbd5e1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 50px;
+        }
+
+        .card h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .spec {
+            color: var(--orange);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
+
+        .desc {
+            color: var(--muted);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .card button {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            font-weight: 700;
+        }
+
+        .card button:hover {
+            background: white;
+            color: black;
+        }
+
+        /* Footer */
+        .footer-fullwidth {
+            width: 100%;
+            margin-top: 120px;
+            background: rgba(14, 10, 8, 0.88);
+            border-top: 1px solid rgba(233, 114, 25, 0.25);
+            backdrop-filter: blur(18px);
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: auto;
+            padding: 70px 40px 35px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        /* Brand Column */
+        .footer-col-brand h3 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, #e97219, #ff842b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-col-brand p {
+            color: #cbd5e1;
+            line-height: 1.9;
+            font-size: 0.95rem;
+            max-width: 420px;
+            margin-bottom: 16px;
+        }
+
+        .footer-tagline-sub {
+            color: #ff842b;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Other Columns */
+        .footer-col h4 {
+            font-size: 0.85rem;
+            margin-bottom: 22px;
+            color: #ffffff;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #e97219;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        .contact-list,
+        .metrics-list {
+            list-style: none;
+        }
+
+        .contact-list li,
+        .metrics-list li {
+            color: #cbd5e1;
+            margin-bottom: 16px;
+            line-height: 1.8;
+            font-size: 0.92rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 25px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-section h1 {
+                font-size: 2rem;
+            }
+            .card {
+                width: 100%;
+                max-width: 380px;
+            }
+            .topbar {
+                padding: 20px;
+            }
+            .footer-inner {
+                padding: 50px 20px 25px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- Background -->
     <div class="bg-container">
-        <img src="{% static 'Images/prod.png' %}" class="welding-bg">
+        <img src="{% static 'Images/prod.png' %}" class="welding-bg" alt="Industrial Background">
     </div>
 
     <div class="overlay"></div>
@@ -80,79 +359,54 @@
             </div>
 
         </div>
-        
 
     </section>
+
     <!-- Footer -->
-<div class="footer-fullwidth">
+    <div class="footer-fullwidth">
+        <div class="footer-inner">
+            <div class="footer-grid">
 
-    <div class="footer-inner">
+                <!-- Brand -->
+                <div class="footer-col-brand">
+                    <h3>WECON ELECTRODES</h3>
+                    <p>
+                        Engineered for high tensile strength,
+                        predictable arc performance,
+                        and reliable industrial fabrication.
+                    </p>
+                    <div class="footer-tagline-sub">
+                        Quality Welds • Every Arc • Every Time
+                    </div>
+                </div>
 
-        <div class="footer-grid">
+                <!-- Contact -->
+                <div class="footer-col">
+                    <h4>COMMUNICATION HUB</h4>
+                    <ul class="contact-list">
+                        <li>📍 Wayanad, Kerala, India</li>
+                        <li>📞 +91 8714448342</li>
+                        <li>✉️ wecon@weldings.com</li>
+                    </ul>
+                </div>
 
-            <!-- Brand -->
-
-            <div class="footer-col-brand">
-
-                <h3>WECON ELECTRODES</h3>
-
-                <p>
-                    Engineered for high tensile strength,
-                    predictable arc performance,
-                    and reliable industrial fabrication.
-                </p>
-
-                <div class="footer-tagline-sub">
-                    Quality Welds • Every Arc • Every Time
+                <!-- Quality -->
+                <div class="footer-col">
+                    <h4>METRIC COMPLIANCE</h4>
+                    <ul class="metrics-list">
+                        <li>✔ AWS High Grade Standards</li>
+                        <li>✔ Exacting 10 & 12 SWG Uniformity</li>
+                        <li>✔ Freight & Logistics Safe</li>
+                    </ul>
                 </div>
 
             </div>
 
-            <!-- Contact -->
-
-            <div class="footer-col">
-
-                <h4>COMMUNICATION HUB</h4>
-
-                <ul class="contact-list">
-
-                    <li>📍 Wayanad, Kerala, India</li>
-
-                    <li>📞 +91 8714448342</li>
-
-                    <li>✉️ wecon@weldings.com</li>
-
-                </ul>
-
+            <div class="copyright">
+                © 2026 WECON WELDING ELECTRODES — ALL RIGHTS RESERVED.
             </div>
-
-            <!-- Quality -->
-
-            <div class="footer-col">
-
-                <h4>METRIC COMPLIANCE</h4>
-
-                <ul class="metrics-list">
-
-                    <li>✔ AWS High Grade Standards</li>
-
-                    <li>✔ Exacting 10 & 12 SWG Uniformity</li>
-
-                    <li>✔ Freight & Logistics Safe</li>
-
-                </ul>
-
-            </div>
-
         </div>
-
-        <div class="copyright">
-            © 2026 WECON WELDING ELECTRODES — ALL RIGHTS RESERVED.
-        </div>
-
     </div>
-
-</div>
 
 </body>
 </html>
