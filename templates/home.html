@@ -6,17 +6,474 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Wecon Electrodes | Quality Welds Every Arc, Every Time</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        /* --- CSS RESET & VARIABLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0f1115;
+            --surface-dark: #161920;
+            --surface-card: #1e222b;
+            --accent-orange: #ff6b00;
+            --accent-amber: #ffb300;
+            --text-light: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border-color: #2e3545;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --font-display: 'Syncopate', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- BACKGROUND BACKGROUND & OVERLAYS --- */
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .welding-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+            filter: grayscale(40%) contrast(110%);
+        }
+
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(180deg, rgba(15,17,21,0.85) 0%, rgba(15,17,21,0.98) 100%);
+        }
+
+        /* --- LAYOUT CONTAINERS --- */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        .header-fullwidth {
+            width: 100%;
+            background-color: rgba(22, 25, 32, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: var(--font-display);
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-light);
+            line-height: 1;
+        }
+
+        .logo span {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        .nav {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-orange);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 120px 0 60px 0;
+            max-width: 700px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: rgba(255, 107, 0, 0.15);
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-amber);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .hero h2 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
+
+        .hero h2 span {
+            color: var(--accent-orange);
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 600px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #e05e00 100%);
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.4);
+        }
+
+        /* --- STATS ROW --- */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            padding: 40px 0 80px 0;
+        }
+
+        .stat {
+            background-color: var(--surface-dark);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: 6px;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .stat:hover {
+            border-color: rgba(255, 107, 0, 0.4);
+        }
+
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent-orange);
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* --- PRODUCTS SECTION --- */
+        #products {
+            padding: 40px 0 100px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .section-header h3 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .product-counter {
+            font-size: 14px;
+            color: var(--accent-amber);
+            background-color: rgba(255, 179, 0, 0.1);
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 179, 0, 0.2);
+            font-weight: 600;
+        }
+
+        /* PRODUCT GRID & DYNAMIC CARDS */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .product-card {
+            background-color: var(--surface-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 107, 0, 0.5);
+        }
+
+        .product-img {
+            background-color: var(--surface-card);
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .product-icon {
+            font-size: 48px;
+        }
+
+        .gauge-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background-color: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 4px;
+            color: var(--text-light);
+        }
+
+        .product-info {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .product-spec {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-amber);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+        }
+
+        .inquiry-btn {
+            background-color: transparent;
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .inquiry-btn:hover {
+            background-color: var(--accent-orange);
+            color: #fff;
+        }
+
+        .quality-tag {
+            font-size: 12px;
+            font-weight: 600;
+            color: #10b981;
+        }
+
+        /* --- FOOTER SECTIONS --- */
+        .footer-fullwidth {
+            width: 100%;
+            background-color: #0b0c0f;
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0 30px 0;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(2, 1fr);
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col-brand h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .footer-col-brand p {
+            font-size: 14px;
+            color: var(--text-muted);
+            max-width: 400px;
+            margin-bottom: 16px;
+        }
+
+        .footer-tagline-sub {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent-orange);
+            letter-spacing: 1px;
+        }
+
+        .footer-col h4 {
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            color: #fff;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            width: 30px;
+            height: 20px;
+            border-bottom: 2px solid var(--accent-orange);
+        }
+
+        .contact-list, .metrics-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 24px;
+            text-align: center;
+            font-size: 12px;
+            color: #4b5563;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .hero h2 {
+                font-size: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header-inner {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .nav {
+                gap: 20px;
+            }
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- Background -->
     <div class="bg-container">
         <img class="welding-bg"
              src="{% static 'Images/welding.png' %}"
@@ -25,7 +482,6 @@
 
     <div class="gradient-overlay"></div>
 
-    <!-- Header -->
     <div class="header-fullwidth">
         <div class="header-inner">
 
@@ -51,10 +507,8 @@
         </div>
     </div>
 
-    <!-- Main Container -->
     <div class="container">
 
-        <!-- Hero -->
         <section class="hero">
 
             <div class="hero-badge">
@@ -79,7 +533,6 @@
 
         </section>
 
-        <!-- Stats -->
         <div class="stats-row">
 
             <div class="stat">
@@ -104,7 +557,6 @@
 
         </div>
 
-        <!-- Products -->
         <section id="products">
 
             <div class="section-header">
@@ -120,7 +572,6 @@
 
     </div>
 
-    <!-- Footer -->
     <div class="footer-fullwidth">
 
         <div class="footer-inner">
