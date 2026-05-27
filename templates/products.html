@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wecon Products</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Products CSS -->
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="bg-container">
+        <img src="{% static 'Images/prod.png' %}" class="welding-bg">
+    </div>
+
+    <div class="overlay"></div>
+
+    <!-- Header -->
+    <header class="topbar">
+        <a href="/" class="back-btn">← BACK TO HOME</a>
+    </header>
+
+    <!-- Main -->
+    <section class="products-section">
+
+        <h1>OUR PRODUCTS</h1>
+
+        <p class="subtitle">
+            High-performance welding electrodes engineered for industrial reliability.
+        </p>
+
+        <div class="products-grid">
+
+            <!-- Product 1 -->
+            <div class="card" onclick="window.location.href='/e7018/'">
+
+                <div class="card-top">
+                    <div class="icon">💠</div>
+                    <span class="badge">10 SWG & 12 SWG</span>
+                </div>
+
+                <h2>WECON E7018</h2>
+
+                <p class="spec">AWS A5.1 CERTIFIED</p>
+
+                <p class="desc">
+                    Low-hydrogen structural electrode designed for high tensile strength applications.
+                </p>
+
+                <button>EXPLORE</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="card" onclick="window.location.href='/e6013/'">
+
+                <div class="card-top">
+                    <div class="icon">⚡</div>
+                    <span class="badge">10 SWG & 12 SWG</span>
+                </div>
+
+                <h2>WECON E6013</h2>
+
+                <p class="spec">AWS A5.1 CERTIFIED</p>
+
+                <p class="desc">
+                    Premium all-position mild steel electrode with smooth arc stability.
+                </p>
+
+                <button>EXPLORE</button>
+            </div>
+
+        </div>
+        
+
+    </section>
+    <!-- Footer -->
+<div class="footer-fullwidth">
+
+    <div class="footer-inner">
+
+        <div class="footer-grid">
+
+            <!-- Brand -->
+
+            <div class="footer-col-brand">
+
+                <h3>WECON ELECTRODES</h3>
+
+                <p>
+                    Engineered for high tensile strength,
+                    predictable arc performance,
+                    and reliable industrial fabrication.
+                </p>
+
+                <div class="footer-tagline-sub">
+                    Quality Welds • Every Arc • Every Time
+                </div>
+
+            </div>
+
+            <!-- Contact -->
+
+            <div class="footer-col">
+
+                <h4>COMMUNICATION HUB</h4>
+
+                <ul class="contact-list">
+
+                    <li>📍 Wayanad, Kerala, India</li>
+
+                    <li>📞 +91 8714448342</li>
+
+                    <li>✉️ wecon@weldings.com</li>
+
+                </ul>
+
+            </div>
+
+            <!-- Quality -->
+
+            <div class="footer-col">
+
+                <h4>METRIC COMPLIANCE</h4>
+
+                <ul class="metrics-list">
+
+                    <li>✔ AWS High Grade Standards</li>
+
+                    <li>✔ Exacting 10 & 12 SWG Uniformity</li>
+
+                    <li>✔ Freight & Logistics Safe</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 WECON WELDING ELECTRODES — ALL RIGHTS RESERVED.
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

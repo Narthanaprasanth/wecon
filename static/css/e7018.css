@@ -1,0 +1,723 @@
+:root{
+    --orange:#ff6b00;
+    --dark:#0b0c10;
+    --card:rgba(20,20,25,0.82);
+    --text:#ffffff;
+    --muted:#94a3b8;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:#0b0c10;
+    color:white;
+    overflow-x:hidden;
+    min-height:100vh;
+}
+
+/* Background */
+
+.industrial-bg-wrapper{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+}
+
+.industrial-bg-image{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.18;
+}
+
+.dark-overlay-layer{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+
+    background:linear-gradient(
+        135deg,
+        rgba(0,0,0,0.92),
+        rgba(255,107,0,0.05)
+    );
+}
+
+/* Navigation */
+
+.catalog-navbar{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:30px 20px;
+}
+
+.catalog-back-link{
+    color:#cbd5e1;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:2px;
+    font-weight:700;
+}
+
+.catalog-back-link:hover{
+    color:var(--orange);
+}
+
+/* Layout */
+
+.electrode-layout-grid{
+    width:100%;
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:1fr 1.1fr;
+
+    gap:60px;
+
+    padding:20px 20px 80px;
+}
+
+/* Left Panel */
+
+.electrode-showcase-panel{
+    position:sticky;
+    top:40px;
+
+    height:fit-content;
+}
+
+.electrode-visual-box{
+    
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    border-radius:28px;
+
+    ;
+
+    min-height:500px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    backdrop-filter:blur(12px);
+}
+
+.electrode-symbol{
+    font-size:7rem;
+
+    
+
+    animation:float 4s ease-in-out infinite;
+}
+.industrial-bg-image1{
+    width: 100%;
+    border-radius: 30px;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+}
+
+/* Right Panel */
+
+.electrode-information-panel{
+    display:flex;
+    flex-direction:column;
+}
+
+.electrode-category-label{
+    color:var(--orange);
+
+    font-size:13px;
+
+    letter-spacing:3px;
+
+    font-weight:700;
+
+    margin-bottom:14px;
+}
+
+.electrode-main-title{
+    font-family:'Syncopate',sans-serif;
+
+    font-size:3rem;
+
+    line-height:1.2;
+
+    margin-bottom:20px;
+
+    color:white;
+}
+
+.electrode-certification-bar{
+    border-left:4px solid var(--orange);
+
+    padding-left:16px;
+
+    color:#cbd5e1;
+
+    margin-bottom:35px;
+
+    letter-spacing:1px;
+}
+
+.electrode-description-text{
+    color:var(--muted);
+
+    line-height:1.9;
+
+    font-size:16px;
+
+    margin-bottom:40px;
+}
+
+/* Specification Table */
+
+.technical-sheet-box{
+    background:var(--card);
+
+    border:1px solid rgba(255,255,255,0.06);
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    margin-bottom:40px;
+
+    backdrop-filter:blur(10px);
+}
+
+.technical-sheet-row{
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:18px 24px;
+
+    border-bottom:1px solid rgba(255,255,255,0.05);
+}
+
+.technical-sheet-row:last-child{
+    border-bottom:none;
+}
+
+.technical-sheet-key{
+    color:#94a3b8;
+
+    font-size:15px;
+}
+
+.technical-sheet-value{
+    color:white;
+
+    font-weight:600;
+
+    text-align:right;
+}
+
+/* Buttons */
+
+.electrode-action-buttons{
+    display:flex;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+}
+
+.primary-action-button{
+    background:var(--orange);
+
+    color:white;
+
+    border:none;
+
+    padding:15px 34px;
+
+    border-radius:14px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.primary-action-button:hover{
+    transform:translateY(-3px);
+
+    background:#ff7a1a;
+}
+
+.secondary-action-button{
+    border:1px solid rgba(255,255,255,0.15);
+
+    color:#cbd5e1;
+
+    text-decoration:none;
+
+    padding:15px 28px;
+
+    border-radius:14px;
+
+    transition:0.3s;
+}
+
+.secondary-action-button:hover{
+    border-color:white;
+
+    color:white;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    .electrode-layout-grid{
+        grid-template-columns:1fr;
+    }
+
+    .electrode-showcase-panel{
+        position:relative;
+        top:0;
+    }
+
+    .electrode-visual-box{
+        min-height:300px;
+    }
+
+    .electrode-main-title{
+        font-size:2rem;
+    }
+}
+
+
+  body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0c10;
+            color: #f1f5f9;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .welding-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            filter: grayscale(40%) contrast(110%);
+        }
+
+        .gradient-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, 
+                rgba(11, 12, 16, 0.97) 30%, 
+                rgba(255, 107, 0, 0.05) 100%
+            );
+        }
+
+        /* ==========================================================================
+           2. NAVIGATION HEADER STYLE
+           ========================================================================== */
+        .products-header-nav {
+            width: 100%;
+            max-width: 1200px;
+            padding: 32px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .back-home-link {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #94a3b8;
+            text-decoration: none;
+            letter-spacing: 0.1em;
+            transition: color 0.2s ease;
+        }
+
+        .back-home-link:hover {
+            color: #ff6b00;
+        }
+
+        /* ==========================================================================
+           3. MAIN PRODUCT DISPLAY LAYOUT
+           ========================================================================== */
+        .product-detail-container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 24px 80px 24px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        /* Left Side: Premium Graphical Placeholder Showcase */
+        .product-visual-showcase {
+            position: sticky;
+            top: 40px;
+            background: linear-gradient(145deg, rgba(26, 27, 35, 0.6), rgba(17, 18, 23, 0.8));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 28px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+        }
+
+        .product-image-wrapper {
+            width: 100%;
+            height: 380px;
+            background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        /* Elegant Mock Image / Graphics rendering rule with dynamic electrical color hue */
+        .product-mock-graphic {
+            font-size: 6rem;
+            filter: drop-shadow(0 0 25px rgba(255, 150, 0, 0.4));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Right Side: Structured Specifications & Content Informational Engine */
+        .product-content-details {
+            text-align: left;
+        }
+
+        .category-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #ff6b00;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0 0 16px 0;
+            color: #ffffff;
+        }
+
+        .compliance-lead {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.95rem;
+            color: #94a3b8;
+            border-left: 3px solid #ff6b00;
+            padding-left: 14px;
+            margin-bottom: 32px;
+            letter-spacing: 0.05em;
+        }
+
+        .product-long-desc {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        /* Technical Data Specification Table Sheet */
+        .specs-table-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 16px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: #64748b;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .spec-value {
+            color: #f8fafc;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-align: right;
+        }
+
+        /* Call To Action Buttons Block */
+        .action-container-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .primary-quote-btn {
+            background-color: #ff6b00;
+            color: #ffffff;
+            border: none;
+            padding: 16px 36px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 10px 20px -10px rgba(255, 107, 0, 0.4);
+        }
+
+        .primary-quote-btn:hover {
+            background-color: #ff7a1a;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px -5px rgba(255, 107, 0, 0.5);
+        }
+
+        .secondary-back-btn {
+            background-color: transparent;
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 16px 28px;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .secondary-back-btn:hover {
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ==========================================================================
+           4. RESPONSIVE BREAKPOINTS
+           ========================================================================== */
+        @media (max-width: 968px) {
+            .product-detail-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .product-visual-showcase {
+                position: static;
+                padding: 24px;
+            }
+            .product-image-wrapper {
+                height: 280px;
+            }
+            h1 { font-size: 2.2rem; }
+        }
+
+
+
+        /* ===================================
+   FOOTER
+=================================== */
+
+.footer-fullwidth{
+    width:100%;
+
+    margin-top:120px;
+
+    background:rgba(14,10,8,0.88);
+
+    border-top:1px solid rgba(233,114,25,0.25);
+
+    backdrop-filter:blur(18px);
+}
+
+.footer-inner{
+    max-width:1280px;
+
+    margin:auto;
+
+    padding:70px 40px 35px;
+}
+
+.footer-grid{
+    display:grid;
+
+    grid-template-columns:1.5fr 1fr 1fr;
+
+    gap:60px;
+
+    margin-bottom:50px;
+}
+
+/* Brand */
+
+.footer-col-brand h3{
+    font-family:'Syncopate',sans-serif;
+
+    font-size:1.3rem;
+
+    margin-bottom:18px;
+
+    letter-spacing:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e97219,
+            #ff842b
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+}
+
+.footer-col-brand p{
+    color:#cbd5e1;
+
+    line-height:1.9;
+
+    font-size:0.95rem;
+
+    max-width:420px;
+
+    margin-bottom:16px;
+}
+
+.footer-tagline-sub{
+    color:#ff842b;
+
+    font-size:0.78rem;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+/* Column */
+
+.footer-col h4{
+    font-size:0.85rem;
+
+    margin-bottom:22px;
+
+    color:#ffffff;
+
+    letter-spacing:2px;
+
+    border-bottom:2px solid #e97219;
+
+    display:inline-block;
+
+    padding-bottom:8px;
+}
+
+.contact-list,
+.metrics-list{
+    list-style:none;
+}
+
+.contact-list li,
+.metrics-list li{
+    color:#cbd5e1;
+
+    margin-bottom:16px;
+
+    line-height:1.8;
+
+    font-size:0.92rem;
+}
+
+.copyright{
+    border-top:1px solid rgba(255,255,255,0.08);
+
+    padding-top:25px;
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    font-size:0.78rem;
+
+    letter-spacing:1px;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    .footer-grid{
+        grid-template-columns:1fr;
+        gap:40px;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .footer-inner{
+        padding:50px 20px 25px;
+    }
+
+}

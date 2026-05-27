@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WECON E7018</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/e7018.css' %}">
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div class="industrial-bg-wrapper">
+
+        <img class="industrial-bg-image"
+             src="{% static 'Images/welding.png' %}"
+             alt="Industrial Welding">
+
+    </div>
+
+    <div class="dark-overlay-layer"></div>
+
+    <!-- Top Navigation -->
+    <header class="catalog-navbar">
+
+        <a href="/products/" class="catalog-back-link">
+            ← BACK TO CATALOG
+        </a>
+
+    </header>
+
+    <!-- Main Product Section -->
+    <main class="electrode-layout-grid">
+
+        <!-- Left Showcase -->
+       <section class="electrode-showcase-panel">
+
+            <div class="electrode-visual-box">
+                <img class="industrial-bg-image1"
+             src="{% static 'Images/img1.png' %}"
+             alt="Industrial Welding">
+
+    </div>
+                
+
+            </div>
+
+        </section>
+
+        <!-- Right Content -->
+        <section class="electrode-information-panel">
+
+            <div class="electrode-category-label">
+                HEAVY-DUTY INDUSTRIAL
+            </div>
+
+            <h1 class="electrode-main-title">
+                WECON E7018
+            </h1>
+
+            <div class="electrode-certification-bar">
+                ⚙️ AWS A5.1 / ASME SFA 5.1 COMPLIANT
+            </div>
+
+            <p class="electrode-description-text">
+                The WECON E7018 is a premium low-hydrogen carbon steel electrode engineered for structural welding applications demanding superior tensile strength, arc stability, and clean weld performance.
+            </p>
+
+            <!-- Specification Table -->
+            <div class="technical-sheet-box">
+
+                <div class="technical-sheet-row">
+                    <div class="technical-sheet-key">
+                        Electrode Type
+                    </div>
+
+                    <div class="technical-sheet-value">
+                        Low Hydrogen Iron Powder
+                    </div>
+                </div>
+
+                <div class="technical-sheet-row">
+                    <div class="technical-sheet-key">
+                        Available Diameters
+                    </div>
+
+                    <div class="technical-sheet-value">
+                        10 SWG & 12 SWG
+                    </div>
+                </div>
+
+                <div class="technical-sheet-row">
+                    <div class="technical-sheet-key">
+                        Welding Positions
+                    </div>
+
+                    <div class="technical-sheet-value">
+                        F, H, V-up, OH
+                    </div>
+                </div>
+
+                <div class="technical-sheet-row">
+                    <div class="technical-sheet-key">
+                        Current Type
+                    </div>
+
+                    <div class="technical-sheet-value">
+                        AC & DC+
+                    </div>
+                </div>
+
+                <div class="technical-sheet-row">
+                    <div class="technical-sheet-key">
+                        Tensile Strength
+                    </div>
+
+                    <div class="technical-sheet-value">
+                        ≥ 490 MPa
+                    </div>
+                </div>
+
+                <div class="technical-sheet-row">
+                    <div class="technical-sheet-key">
+                        Yield Strength
+                    </div>
+
+                    <div class="technical-sheet-value">
+                        ≥ 400 MPa
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div class="electrode-action-buttons">
+
+                <button class="primary-action-button">
+                    REQUEST QUOTE
+                </button>
+
+                <a href="/products/" class="secondary-action-button">
+                    VIEW CATALOG
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+<!-- Footer -->
+<div class="footer-fullwidth">
+
+    <div class="footer-inner">
+
+        <div class="footer-grid">
+
+            <!-- Brand -->
+
+            <div class="footer-col-brand">
+
+                <h3>WECON ELECTRODES</h3>
+
+                <p>
+                    Engineered for high tensile strength,
+                    predictable arc performance,
+                    and reliable industrial fabrication.
+                </p>
+
+                <div class="footer-tagline-sub">
+                    Quality Welds • Every Arc • Every Time
+                </div>
+
+            </div>
+
+            <!-- Contact -->
+
+            <div class="footer-col">
+
+                <h4>COMMUNICATION HUB</h4>
+
+                <ul class="contact-list">
+
+                    <li>📍 Wayanad, Kerala, India</li>
+
+                    <li>📞 +91 8714448342</li>
+
+                    <li>✉️ wecon@weldings.com</li>
+
+                </ul>
+
+            </div>
+
+            <!-- Quality -->
+
+            <div class="footer-col">
+
+                <h4>METRIC COMPLIANCE</h4>
+
+                <ul class="metrics-list">
+
+                    <li>✔ AWS High Grade Standards</li>
+
+                    <li>✔ Exacting 10 & 12 SWG Uniformity</li>
+
+                    <li>✔ Freight & Logistics Safe</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            © 2026 WECON WELDING ELECTRODES — ALL RIGHTS RESERVED.
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
