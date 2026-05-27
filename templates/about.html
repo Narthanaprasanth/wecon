@@ -1,24 +1,464 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Wecon Electrodes</title>
 
-    <!-- Fonts -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
-    
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Plus Jakarta Sans', sans-serif;
+            background:#0d0d0d;
+            color:white;
+            overflow-x:hidden;
+        }
+
+        /* Background */
+
+        .bg-container{
+            position:fixed;
+            inset:0;
+            z-index:-2;
+        }
+
+        .welding-bg{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .gradient-overlay{
+            position:fixed;
+            inset:0;
+            background:linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.72),
+            rgba(0,0,0,0.94)
+            );
+            z-index:-1;
+        }
+
+        /* Header */
+
+        .header-fullwidth{
+            width:100%;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:rgba(0,0,0,0.72);
+            backdrop-filter:blur(10px);
+            border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        .header-inner{
+            max-width:1200px;
+            margin:auto;
+            padding:20px 30px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .logo h1{
+            font-family:'Syncopate', sans-serif;
+            font-size:30px;
+            color:#ff6b00;
+        }
+
+        .logo span{
+            font-size:13px;
+            color:#ccc;
+        }
+
+        .nav{
+            display:flex;
+            list-style:none;
+            gap:30px;
+        }
+
+        .nav-link{
+            text-decoration:none;
+            color:white;
+            font-weight:600;
+            transition:0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active{
+            color:#ff6b00;
+        }
+
+        /* Main Container */
+
+        .container{
+            max-width:1200px;
+            margin:auto;
+            padding:60px 20px;
+        }
+
+        /* Hero */
+
+        .about-hero{
+            text-align:center;
+            padding:100px 20px;
+        }
+
+        .hero-badge{
+            display:inline-block;
+            background:#ff6b00;
+            padding:10px 18px;
+            border-radius:30px;
+            font-size:14px;
+            font-weight:600;
+        }
+
+        .about-hero h2{
+            margin-top:30px;
+            font-size:60px;
+            line-height:1.2;
+            font-weight:800;
+        }
+
+        .about-hero h2 span{
+            color:#ff6b00;
+        }
+
+        .about-hero p{
+            max-width:850px;
+            margin:30px auto 0;
+            font-size:18px;
+            line-height:1.9;
+            color:#d0d0d0;
+        }
+
+        /* Section Header */
+
+        .section-header-center{
+            text-align:center;
+            margin-bottom:50px;
+        }
+
+        .section-subtitle{
+            color:#ff6b00;
+            font-size:14px;
+            font-weight:700;
+            letter-spacing:2px;
+        }
+
+        .section-header-center h3{
+            margin-top:15px;
+            font-size:42px;
+            line-height:1.3;
+        }
+
+        /* About Grid */
+
+        .about-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:30px;
+        }
+
+        .about-card{
+            background:rgba(255,255,255,0.05);
+            padding:35px;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.08);
+            backdrop-filter:blur(10px);
+            transition:0.4s;
+        }
+
+        .about-card:hover{
+            transform:translateY(-8px);
+            border-color:#ff6b00;
+        }
+
+        .about-icon{
+            font-size:42px;
+        }
+
+        .about-card h4{
+            margin-top:20px;
+            font-size:24px;
+        }
+
+        .about-card p{
+            margin-top:15px;
+            line-height:1.8;
+            color:#ccc;
+        }
+
+        /* Story Section */
+
+        .story-section{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+            gap:50px;
+            align-items:center;
+            margin-top:120px;
+        }
+
+        .badge{
+            display:inline-block;
+            background:#ff6b00;
+            padding:8px 16px;
+            border-radius:30px;
+            font-size:13px;
+            font-weight:700;
+        }
+
+        .story-content h3{
+            margin-top:25px;
+            font-size:45px;
+            line-height:1.3;
+        }
+
+        .story-content p{
+            margin-top:20px;
+            color:#ccc;
+            line-height:1.9;
+        }
+
+        .story-stats{
+            display:flex;
+            flex-wrap:wrap;
+            gap:30px;
+            margin-top:35px;
+        }
+
+        .number{
+            font-size:38px;
+            font-weight:800;
+            color:#ff6b00;
+        }
+
+        .label{
+            color:#ccc;
+        }
+
+        .story-image{
+            height:420px;
+            border-radius:25px;
+            background:rgba(255,255,255,0.06);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            backdrop-filter:blur(10px);
+        }
+
+        .placeholder-icon{
+            font-size:80px;
+        }
+
+        /* Mission */
+
+        .mission-section{
+            margin-top:120px;
+        }
+
+        .mission-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:30px;
+            margin-top:50px;
+        }
+
+        .mission-card{
+            background:rgba(255,255,255,0.05);
+            padding:40px;
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .mission-top{
+            display:flex;
+            align-items:center;
+            gap:15px;
+        }
+
+        .mission-top span{
+            font-size:40px;
+        }
+
+        .mission-card p{
+            margin-top:20px;
+            color:#ccc;
+            line-height:1.9;
+        }
+
+        /* Values */
+
+        .values-section{
+            margin-top:120px;
+        }
+
+        .values-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+            gap:25px;
+            margin-top:50px;
+        }
+
+        .value-item{
+            background:rgba(255,255,255,0.05);
+            padding:30px;
+            border-radius:18px;
+            text-align:center;
+            transition:0.3s;
+        }
+
+        .value-item:hover{
+            transform:translateY(-5px);
+            border:1px solid #ff6b00;
+        }
+
+        .value-icon{
+            font-size:42px;
+        }
+
+        .value-item h4{
+            margin-top:20px;
+        }
+
+        .value-item p{
+            margin-top:10px;
+            color:#ccc;
+        }
+
+        /* Stats */
+
+        .stats-row{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:25px;
+            margin-top:120px;
+        }
+
+        .stat{
+            background:rgba(255,255,255,0.05);
+            padding:40px 20px;
+            border-radius:20px;
+            text-align:center;
+        }
+
+        .stat-number{
+            font-size:42px;
+            font-weight:800;
+            color:#ff6b00;
+        }
+
+        .stat-label{
+            margin-top:10px;
+            color:#ccc;
+        }
+
+        /* Footer */
+
+        .footer-fullwidth{
+            margin-top:120px;
+            background:#050505;
+            border-top:1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-inner{
+            max-width:1200px;
+            margin:auto;
+            padding:70px 20px 30px;
+        }
+
+        .footer-grid{
+            display:grid;
+            grid-template-columns:2fr 1fr 1fr;
+            gap:50px;
+        }
+
+        .footer-col-brand h3{
+            color:#ff6b00;
+            margin-bottom:20px;
+        }
+
+        .footer-col-brand p{
+            color:#ccc;
+            line-height:1.8;
+        }
+
+        .footer-tagline-sub{
+            margin-top:15px;
+            font-weight:600;
+        }
+
+        .footer-col h4{
+            margin-bottom:20px;
+            color:#ff6b00;
+        }
+
+        .contact-list,
+        .metrics-list{
+            list-style:none;
+        }
+
+        .contact-list li,
+        .metrics-list li{
+            margin-bottom:12px;
+            color:#ccc;
+        }
+
+        .copyright{
+            margin-top:50px;
+            padding-top:20px;
+            border-top:1px solid rgba(255,255,255,0.08);
+            text-align:center;
+            color:#888;
+            font-size:14px;
+        }
+
+        /* Responsive */
+
+        @media(max-width:768px){
+
+            .header-inner{
+                flex-direction:column;
+                gap:20px;
+            }
+
+            .about-hero h2{
+                font-size:40px;
+            }
+
+            .section-header-center h3,
+            .story-content h3{
+                font-size:34px;
+            }
+
+            .footer-grid{
+                grid-template-columns:1fr;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
     <!-- Background -->
+
     <div class="bg-container">
         <img src="{% static 'Images/p.jpg' %}" alt="Industrial Welding" class="welding-bg">
     </div>
@@ -26,13 +466,14 @@
     <div class="gradient-overlay"></div>
 
     <!-- Header -->
+
     <div class="header-fullwidth">
+
         <div class="header-inner">
-            <div class="logo-block">
-                <div class="logo">
-                    <h1>WECON</h1>
-                    <span>Welding Electrodes</span>
-                </div>
+
+            <div class="logo">
+                <h1>WECON</h1>
+                <span>Welding Electrodes</span>
             </div>
 
             <ul class="nav">
@@ -40,181 +481,309 @@
                 <li><a href="{% url 'about' %}" class="nav-link active">ABOUT</a></li>
                 <li><a href="{% url 'products_page' %}" class="nav-link">PRODUCTS</a></li>
             </ul>
+
         </div>
+
     </div>
 
-    <!-- Main Container -->
+    <!-- Main Content -->
+
     <div class="container">
 
-        <!-- About Hero -->
+        <!-- Hero -->
+
         <section class="about-hero">
+
             <div class="hero-badge">
-                <span>⚡</span> INDUSTRIAL EXCELLENCE SINCE 2021
+                ⚡ INDUSTRIAL EXCELLENCE SINCE 2021
             </div>
-            <h2>Forging Stronger <span>Industrial Connections</span></h2>
+
+            <h2>
+                Forging Stronger
+                <span>Industrial Connections</span>
+            </h2>
+
             <p>
                 Wecon Electrodes is committed to delivering high-performance welding solutions engineered
                 for durability, reliability, and industrial precision. Built with advanced manufacturing standards,
                 our electrodes ensure consistent arc stability and superior weld quality across demanding applications.
             </p>
+
         </section>
 
-        <!-- Company Overview -->
+        <!-- About -->
+
         <section class="about-section">
+
             <div class="section-header-center">
                 <span class="section-subtitle">WHAT WE DO</span>
-                <h3>Precision Engineering<br>For Critical Welds</h3>
+
+                <h3>
+                    Precision Engineering <br>
+                    For Critical Welds
+                </h3>
             </div>
+
             <div class="about-grid">
+
                 <div class="about-card">
                     <div class="about-icon">🏭</div>
+
                     <h4>Industrial Manufacturing</h4>
-                    <p>We manufacture premium welding electrodes engineered for fabrication, construction, maintenance, and heavy industrial operations.</p>
+
+                    <p>
+                        We manufacture premium welding electrodes engineered for fabrication,
+                        construction, maintenance, and heavy industrial operations.
+                    </p>
                 </div>
+
                 <div class="about-card">
                     <div class="about-icon">⚙️</div>
+
                     <h4>Precision Standards</h4>
-                    <p>Every electrode undergoes rigorous quality monitoring to ensure excellent arc performance and weld integrity.</p>
+
+                    <p>
+                        Every electrode undergoes rigorous quality monitoring to ensure
+                        excellent arc performance and weld integrity.
+                    </p>
                 </div>
+
                 <div class="about-card">
                     <div class="about-icon">🛡️</div>
+
                     <h4>Reliable Quality</h4>
-                    <p>Our products are trusted for consistent performance, low spatter generation, and strong structural weld strength.</p>
+
+                    <p>
+                        Our products are trusted for consistent performance,
+                        low spatter generation, and strong structural weld strength.
+                    </p>
                 </div>
+
             </div>
+
         </section>
 
-        <!-- Our Story Section -->
+        <!-- Story -->
+
         <section class="story-section">
+
             <div class="story-content">
+
                 <span class="badge">OUR JOURNEY</span>
-                <h3>Building Trust Through Quality Since 2021</h3>
-                <p>Founded with a vision to revolutionize the welding electrode industry in India, Wecon Electrodes has grown from a small manufacturing unit to a trusted name in industrial welding solutions.</p>
-                <p>Our commitment to excellence, combined with state-of-the-art manufacturing processes and rigorous quality control, ensures that every electrode leaving our facility meets the highest industry standards.</p>
+
+                <h3>
+                    Building Trust Through Quality Since 2021
+                </h3>
+
+                <p>
+                    Founded with a vision to revolutionize the welding electrode industry in India,
+                    Wecon Electrodes has grown from a small manufacturing unit to a trusted name in industrial welding solutions.
+                </p>
+
+                <p>
+                    Our commitment to excellence, combined with state-of-the-art manufacturing processes
+                    and rigorous quality control, ensures that every electrode leaving our facility
+                    meets the highest industry standards.
+                </p>
+
                 <div class="story-stats">
-                    <div class="story-stat">
+
+                    <div>
                         <div class="number">4+</div>
                         <div class="label">Years of Excellence</div>
                     </div>
-                    <div class="story-stat">
+
+                    <div>
                         <div class="number">500+</div>
                         <div class="label">Happy Clients</div>
                     </div>
-                    <div class="story-stat">
+
+                    <div>
                         <div class="number">50+</div>
                         <div class="label">Industrial Partners</div>
                     </div>
+
                 </div>
+
             </div>
+
             <div class="story-image">
                 <div class="placeholder-icon">🏭⚡</div>
             </div>
+
         </section>
 
-        <!-- Mission & Vision -->
+        <!-- Mission -->
+
         <section class="mission-section">
+
             <div class="section-header-center">
+
                 <span class="section-subtitle">OUR PURPOSE</span>
+
                 <h3>Mission & Vision</h3>
+
             </div>
+
             <div class="mission-grid">
+
                 <div class="mission-card">
+
                     <div class="mission-top">
                         <span>🚀</span>
                         <h3>Our Mission</h3>
                     </div>
-                    <p>To provide world-class welding electrode solutions that empower industries with reliable performance, safety, and manufacturing excellence. We strive to deliver exceptional value through innovation and unwavering commitment to quality.</p>
+
+                    <p>
+                        To provide world-class welding electrode solutions that empower industries
+                        with reliable performance, safety, and manufacturing excellence.
+                    </p>
+
                 </div>
+
                 <div class="mission-card">
+
                     <div class="mission-top">
                         <span>🌍</span>
                         <h3>Our Vision</h3>
                     </div>
-                    <p>To become a trusted industrial brand recognized for innovation, durability, and superior welding technology across global markets. We envision a future where Wecon is synonymous with welding excellence.</p>
+
+                    <p>
+                        To become a trusted industrial brand recognized for innovation,
+                        durability, and superior welding technology across global markets.
+                    </p>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- Core Values -->
+        <!-- Values -->
+
         <section class="values-section">
+
             <div class="section-header-center">
+
                 <span class="section-subtitle">WHAT DRIVES US</span>
+
                 <h3>Core Values</h3>
+
             </div>
+
             <div class="values-grid">
+
                 <div class="value-item">
                     <div class="value-icon">🎯</div>
                     <h4>Quality First</h4>
                     <p>Uncompromising quality in every product</p>
                 </div>
+
                 <div class="value-item">
                     <div class="value-icon">🤝</div>
                     <h4>Integrity</h4>
                     <p>Honest and transparent business practices</p>
                 </div>
+
                 <div class="value-item">
                     <div class="value-icon">💡</div>
                     <h4>Innovation</h4>
                     <p>Continuous improvement and innovation</p>
                 </div>
+
                 <div class="value-item">
                     <div class="value-icon">👥</div>
                     <h4>Customer Focus</h4>
                     <p>Putting customers at the heart of everything</p>
                 </div>
+
             </div>
+
         </section>
 
         <!-- Stats -->
+
         <section class="stats-row">
+
             <div class="stat">
                 <div class="stat-number">100%</div>
                 <div class="stat-label">Quality Checked</div>
             </div>
+
             <div class="stat">
                 <div class="stat-number">24/7</div>
                 <div class="stat-label">Customer Support</div>
             </div>
+
             <div class="stat">
                 <div class="stat-number">10 & 12</div>
                 <div class="stat-label">SWG Variants</div>
             </div>
+
             <div class="stat">
                 <div class="stat-number">AWS</div>
                 <div class="stat-label">Standard Compliance</div>
             </div>
+
         </section>
 
     </div>
 
     <!-- Footer -->
+
     <div class="footer-fullwidth">
+
         <div class="footer-inner">
+
             <div class="footer-grid">
+
                 <div class="footer-col-brand">
+
                     <h3>WECON ELECTRODES</h3>
-                    <p>Delivering premium welding electrodes designed for industrial durability, precision arc control, and dependable weld quality.</p>
-                    <div class="footer-tagline-sub">Quality Welds • Every Arc • Every Time</div>
+
+                    <p>
+                        Delivering premium welding electrodes designed for industrial durability,
+                        precision arc control, and dependable weld quality.
+                    </p>
+
+                    <div class="footer-tagline-sub">
+                        Quality Welds • Every Arc • Every Time
+                    </div>
+
                 </div>
+
                 <div class="footer-col">
+
                     <h4>CONTACT</h4>
+
                     <ul class="contact-list">
                         <li>📍 Wayanad, Kerala, India</li>
                         <li>📞 +91 8714448342</li>
                         <li>✉️ wecon@weldings.com</li>
                     </ul>
+
                 </div>
+
                 <div class="footer-col">
+
                     <h4>QUALITY</h4>
+
                     <ul class="metrics-list">
                         <li>✔ AWS Grade Standards</li>
                         <li>✔ Industrial Durability</li>
                         <li>✔ Trusted Manufacturing</li>
                     </ul>
+
                 </div>
+
             </div>
-            <div class="copyright">© 2026 WECON ELECTRODES — ALL RIGHTS RESERVED.</div>
+
+            <div class="copyright">
+                © 2026 WECON ELECTRODES — ALL RIGHTS RESERVED.
+            </div>
+
         </div>
+
     </div>
 
 </body>
