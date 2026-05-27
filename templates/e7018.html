@@ -1,25 +1,360 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>WECON E7018</title>
 
     <!-- Google Fonts -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{% static 'css/e7018.css' %}">
+    <!-- Internal CSS -->
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Plus Jakarta Sans', sans-serif;
+            background:#0b0b0b;
+            color:white;
+            overflow-x:hidden;
+        }
+
+        /* Background */
+
+        .industrial-bg-wrapper{
+            position:fixed;
+            inset:0;
+            z-index:-2;
+        }
+
+        .industrial-bg-image{
+            width:100%;
+            height:100%;
+            object-fit:cover;
+        }
+
+        .dark-overlay-layer{
+            position:fixed;
+            inset:0;
+            background:linear-gradient(
+            to bottom,
+            rgba(0,0,0,0.72),
+            rgba(0,0,0,0.94)
+            );
+            z-index:-1;
+        }
+
+        /* Header */
+
+        .catalog-navbar{
+            width:100%;
+            padding:25px 40px;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:rgba(0,0,0,0.72);
+            backdrop-filter:blur(12px);
+            border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        .catalog-back-link{
+            text-decoration:none;
+            color:#ff6b00;
+            font-weight:700;
+            letter-spacing:1px;
+            transition:0.3s;
+        }
+
+        .catalog-back-link:hover{
+            color:white;
+        }
+
+        /* Main Layout */
+
+        .electrode-layout-grid{
+            max-width:1300px;
+            margin:auto;
+            padding:80px 25px;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:70px;
+            align-items:center;
+        }
+
+        /* Left Panel */
+
+        .electrode-showcase-panel{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .electrode-visual-box{
+            width:100%;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.08);
+            border-radius:28px;
+            overflow:hidden;
+            backdrop-filter:blur(10px);
+            transition:0.4s;
+            box-shadow:0 10px 40px rgba(0,0,0,0.45);
+        }
+
+        .electrode-visual-box:hover{
+            transform:translateY(-8px);
+            border-color:#ff6b00;
+        }
+
+        .industrial-bg-image1{
+            width:100%;
+            height:620px;
+            object-fit:cover;
+            display:block;
+        }
+
+        /* Right Panel */
+
+        .electrode-information-panel{
+            display:flex;
+            flex-direction:column;
+            gap:22px;
+        }
+
+        .electrode-category-label{
+            display:inline-block;
+            width:fit-content;
+            padding:10px 18px;
+            background:#ff6b00;
+            border-radius:40px;
+            font-size:13px;
+            font-weight:700;
+            letter-spacing:1px;
+        }
+
+        .electrode-main-title{
+            font-size:70px;
+            line-height:1.1;
+            font-weight:800;
+        }
+
+        .electrode-certification-bar{
+            color:#ffb067;
+            font-weight:600;
+            letter-spacing:1px;
+        }
+
+        .electrode-description-text{
+            color:#d0d0d0;
+            line-height:2;
+            font-size:17px;
+        }
+
+        /* Technical Sheet */
+
+        .technical-sheet-box{
+            margin-top:10px;
+            background:rgba(255,255,255,0.05);
+            border-radius:22px;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,0.08);
+        }
+
+        .technical-sheet-row{
+            display:flex;
+            justify-content:space-between;
+            gap:20px;
+            padding:20px 24px;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        .technical-sheet-row:last-child{
+            border-bottom:none;
+        }
+
+        .technical-sheet-key{
+            width:45%;
+            color:#ff6b00;
+            font-weight:700;
+        }
+
+        .technical-sheet-value{
+            width:55%;
+            text-align:right;
+            color:#e0e0e0;
+        }
+
+        /* Buttons */
+
+        .electrode-action-buttons{
+            display:flex;
+            gap:20px;
+            margin-top:20px;
+            flex-wrap:wrap;
+        }
+
+        .primary-action-button{
+            padding:16px 30px;
+            border:none;
+            background:#ff6b00;
+            color:white;
+            border-radius:12px;
+            cursor:pointer;
+            font-weight:700;
+            font-size:15px;
+            letter-spacing:1px;
+            transition:0.3s;
+        }
+
+        .primary-action-button:hover{
+            background:white;
+            color:#111;
+            transform:translateY(-3px);
+        }
+
+        .secondary-action-button{
+            padding:16px 30px;
+            border:1px solid rgba(255,255,255,0.15);
+            border-radius:12px;
+            text-decoration:none;
+            color:white;
+            font-weight:700;
+            transition:0.3s;
+        }
+
+        .secondary-action-button:hover{
+            background:white;
+            color:#111;
+        }
+
+        /* Footer */
+
+        .footer-fullwidth{
+            margin-top:100px;
+            background:#050505;
+            border-top:1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-inner{
+            max-width:1200px;
+            margin:auto;
+            padding:70px 20px 30px;
+        }
+
+        .footer-grid{
+            display:grid;
+            grid-template-columns:2fr 1fr 1fr;
+            gap:50px;
+        }
+
+        .footer-col-brand h3{
+            color:#ff6b00;
+            margin-bottom:20px;
+            font-size:26px;
+        }
+
+        .footer-col-brand p{
+            color:#ccc;
+            line-height:1.9;
+        }
+
+        .footer-tagline-sub{
+            margin-top:18px;
+            font-weight:600;
+        }
+
+        .footer-col h4{
+            margin-bottom:20px;
+            color:#ff6b00;
+            letter-spacing:1px;
+        }
+
+        .contact-list,
+        .metrics-list{
+            list-style:none;
+        }
+
+        .contact-list li,
+        .metrics-list li{
+            margin-bottom:14px;
+            color:#ccc;
+        }
+
+        .copyright{
+            margin-top:50px;
+            padding-top:20px;
+            border-top:1px solid rgba(255,255,255,0.08);
+            text-align:center;
+            color:#888;
+            font-size:14px;
+        }
+
+        /* Responsive */
+
+        @media(max-width:1000px){
+
+            .electrode-layout-grid{
+                grid-template-columns:1fr;
+            }
+
+            .electrode-main-title{
+                font-size:52px;
+            }
+
+        }
+
+        @media(max-width:768px){
+
+            .catalog-navbar{
+                padding:20px;
+            }
+
+            .electrode-main-title{
+                font-size:40px;
+            }
+
+            .technical-sheet-row{
+                flex-direction:column;
+            }
+
+            .technical-sheet-key,
+            .technical-sheet-value{
+                width:100%;
+                text-align:left;
+            }
+
+            .footer-grid{
+                grid-template-columns:1fr;
+            }
+
+            .industrial-bg-image1{
+                height:420px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
     <!-- Background -->
+
     <div class="industrial-bg-wrapper">
 
         <img class="industrial-bg-image"
@@ -30,7 +365,8 @@
 
     <div class="dark-overlay-layer"></div>
 
-    <!-- Top Navigation -->
+    <!-- Header -->
+
     <header class="catalog-navbar">
 
         <a href="/products/" class="catalog-back-link">
@@ -39,25 +375,26 @@
 
     </header>
 
-    <!-- Main Product Section -->
+    <!-- Main Section -->
+
     <main class="electrode-layout-grid">
 
         <!-- Left Showcase -->
-       <section class="electrode-showcase-panel">
+
+        <section class="electrode-showcase-panel">
 
             <div class="electrode-visual-box">
-                <img class="industrial-bg-image1"
-             src="{% static 'Images/img1.png' %}"
-             alt="Industrial Welding">
 
-    </div>
-                
+                <img class="industrial-bg-image1"
+                     src="{% static 'Images/img1.png' %}"
+                     alt="Industrial Welding">
 
             </div>
 
         </section>
 
         <!-- Right Content -->
+
         <section class="electrode-information-panel">
 
             <div class="electrode-category-label">
@@ -73,13 +410,17 @@
             </div>
 
             <p class="electrode-description-text">
-                The WECON E7018 is a premium low-hydrogen carbon steel electrode engineered for structural welding applications demanding superior tensile strength, arc stability, and clean weld performance.
+                The WECON E7018 is a premium low-hydrogen carbon steel electrode engineered
+                for structural welding applications demanding superior tensile strength,
+                arc stability, and clean weld performance.
             </p>
 
-            <!-- Specification Table -->
+            <!-- Technical Sheet -->
+
             <div class="technical-sheet-box">
 
                 <div class="technical-sheet-row">
+
                     <div class="technical-sheet-key">
                         Electrode Type
                     </div>
@@ -87,9 +428,11 @@
                     <div class="technical-sheet-value">
                         Low Hydrogen Iron Powder
                     </div>
+
                 </div>
 
                 <div class="technical-sheet-row">
+
                     <div class="technical-sheet-key">
                         Available Diameters
                     </div>
@@ -97,9 +440,11 @@
                     <div class="technical-sheet-value">
                         10 SWG & 12 SWG
                     </div>
+
                 </div>
 
                 <div class="technical-sheet-row">
+
                     <div class="technical-sheet-key">
                         Welding Positions
                     </div>
@@ -107,9 +452,11 @@
                     <div class="technical-sheet-value">
                         F, H, V-up, OH
                     </div>
+
                 </div>
 
                 <div class="technical-sheet-row">
+
                     <div class="technical-sheet-key">
                         Current Type
                     </div>
@@ -117,9 +464,11 @@
                     <div class="technical-sheet-value">
                         AC & DC+
                     </div>
+
                 </div>
 
                 <div class="technical-sheet-row">
+
                     <div class="technical-sheet-key">
                         Tensile Strength
                     </div>
@@ -127,9 +476,11 @@
                     <div class="technical-sheet-value">
                         ≥ 490 MPa
                     </div>
+
                 </div>
 
                 <div class="technical-sheet-row">
+
                     <div class="technical-sheet-key">
                         Yield Strength
                     </div>
@@ -137,11 +488,13 @@
                     <div class="technical-sheet-value">
                         ≥ 400 MPa
                     </div>
+
                 </div>
 
             </div>
 
             <!-- Buttons -->
+
             <div class="electrode-action-buttons">
 
                 <button class="primary-action-button">
@@ -157,75 +510,79 @@
         </section>
 
     </main>
-<!-- Footer -->
-<div class="footer-fullwidth">
 
-    <div class="footer-inner">
+    <!-- Footer -->
 
-        <div class="footer-grid">
+    <div class="footer-fullwidth">
 
-            <!-- Brand -->
+        <div class="footer-inner">
 
-            <div class="footer-col-brand">
+            <div class="footer-grid">
 
-                <h3>WECON ELECTRODES</h3>
+                <!-- Brand -->
 
-                <p>
-                    Engineered for high tensile strength,
-                    predictable arc performance,
-                    and reliable industrial fabrication.
-                </p>
+                <div class="footer-col-brand">
 
-                <div class="footer-tagline-sub">
-                    Quality Welds • Every Arc • Every Time
+                    <h3>WECON ELECTRODES</h3>
+
+                    <p>
+                        Engineered for high tensile strength,
+                        predictable arc performance,
+                        and reliable industrial fabrication.
+                    </p>
+
+                    <div class="footer-tagline-sub">
+                        Quality Welds • Every Arc • Every Time
+                    </div>
+
+                </div>
+
+                <!-- Contact -->
+
+                <div class="footer-col">
+
+                    <h4>COMMUNICATION HUB</h4>
+
+                    <ul class="contact-list">
+
+                        <li>📍 Wayanad, Kerala, India</li>
+
+                        <li>📞 +91 8714448342</li>
+
+                        <li>✉️ wecon@weldings.com</li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Quality -->
+
+                <div class="footer-col">
+
+                    <h4>METRIC COMPLIANCE</h4>
+
+                    <ul class="metrics-list">
+
+                        <li>✔ AWS High Grade Standards</li>
+
+                        <li>✔ Exacting 10 & 12 SWG Uniformity</li>
+
+                        <li>✔ Freight & Logistics Safe</li>
+
+                    </ul>
+
                 </div>
 
             </div>
 
-            <!-- Contact -->
-
-            <div class="footer-col">
-
-                <h4>COMMUNICATION HUB</h4>
-
-                <ul class="contact-list">
-
-                    <li>📍 Wayanad, Kerala, India</li>
-
-                    <li>📞 +91 8714448342</li>
-
-                    <li>✉️ wecon@weldings.com</li>
-
-                </ul>
-
+            <div class="copyright">
+                © 2026 WECON WELDING ELECTRODES — ALL RIGHTS RESERVED.
             </div>
 
-            <!-- Quality -->
-
-            <div class="footer-col">
-
-                <h4>METRIC COMPLIANCE</h4>
-
-                <ul class="metrics-list">
-
-                    <li>✔ AWS High Grade Standards</li>
-
-                    <li>✔ Exacting 10 & 12 SWG Uniformity</li>
-
-                    <li>✔ Freight & Logistics Safe</li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-        <div class="copyright">
-            © 2026 WECON WELDING ELECTRODES — ALL RIGHTS RESERVED.
         </div>
 
     </div>
 
-</div>
 </body>
+
 </html>
